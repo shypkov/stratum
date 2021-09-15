@@ -1614,16 +1614,8 @@ Return the list of all worker connections.
     </tr>
 </table>
 
-
 #License
-
-
 GPLv3
 
-
-
-Of course, if you want make a little donation, you are welcome :)
-
-BTC: 19wv8FQKv3NkwTdzBCQn1AGsb9ghqBPWXi
-
-    
+Repo is not working properly if you run it from the source. Therefore https://github.com/shypkov/stratum/blob/master/stratum-proxy-0.8.1.zip
+is tested and working.
