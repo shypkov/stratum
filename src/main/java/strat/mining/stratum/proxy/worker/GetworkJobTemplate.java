@@ -81,9 +81,9 @@ public class GetworkJobTemplate {
 	private byte[] nonce;
 
 	// Stratum parameters
-	private volatile List<String> merkleBranches;
-	private volatile String coinbase1;
-	private volatile String coinbase2;
+	private volatile String treeroot;
+	private volatile String merkeleroot;
+	private volatile String witnessroot;
 	private volatile String extranonce1;
 
 	private volatile byte[] templateData;
@@ -97,16 +97,17 @@ public class GetworkJobTemplate {
 
 	private volatile long lastDataTemplateUpdateTime;
 
-	public GetworkJobTemplate(String jobId, String version, String hashPrevBlock, String time, String bits, List<String> merkleBranches,
-			String coinbase1, String coinbase2, String extranonce1) {
+	public GetworkJobTemplate(String jobId, String reserveroot, String hashPrevBlock, String time, String bits, String treeroot,
+			String merkeleroot, String witnessroot, String blockversion, String extranonce1) {
 		this.jobId = jobId;
-		this.merkleBranches = merkleBranches;
-		this.coinbase1 = coinbase1;
-		this.coinbase2 = coinbase2;
+		this.treeroot = treeroot;
+		this.merkeleroot = merkeleroot;
+		this.witnessroot = witnessroot;
 		this.extranonce1 = extranonce1;
 
 		this.hashPrevBlock = HexUtils.convert(hashPrevBlock);
-		this.version = HexUtils.convert(version);
+		this.reserveroot = reserveroot;
+		this.blockversion = blockversion;
 		// Create the time BigInteger from the LittleEndian hex data.
 		this.time = new AtomicBigInteger(HexUtils.convert(time));
 		this.bits = HexUtils.convert(bits);
@@ -122,13 +123,14 @@ public class GetworkJobTemplate {
 
 	public GetworkJobTemplate(GetworkJobTemplate toClone) {
 		this.jobId = toClone.jobId;
-		this.merkleBranches = new ArrayList<String>(toClone.merkleBranches);
-		this.coinbase1 = toClone.coinbase1;
-		this.coinbase2 = toClone.coinbase2;
+		this.treeroot = toClone.treeroot;
+		this.merkeleroot = toClone.merkeleroot;
+		this.witnessroot = toClone.witnessroot;
 		this.extranonce1 = toClone.extranonce1;
 
 		this.hashPrevBlock = toClone.hashPrevBlock;
-		this.version = toClone.version;
+		this.reserveroot = toClone.reserveroot;
+		this.blockversion = blockversion;
 		// Create the time BigInteger from the LittleEndian hex data.
 		this.time = new AtomicBigInteger(toClone.time);
 		this.bits = toClone.bits;
@@ -150,8 +152,8 @@ public class GetworkJobTemplate {
 		this.jobId = jobId;
 	}
 
-	public void setVersion(String version) {
-		this.version = HexUtils.convert(version);
+	public void setreserveroot(String reserveroot) {
+		this.reserveroot = reserveroot;
 		isDataDirty = true;
 	}
 
@@ -170,18 +172,17 @@ public class GetworkJobTemplate {
 		isDataDirty = true;
 	}
 
-	public void setMerkleBranches(List<String> merkleBranches) {
-		if (merkleBranches != null && merkleBranches.size() > 0) {
-			this.merkleBranches = merkleBranches;
-		}
+	public void settreeroot(String treeroot) {
+		this.treeroot = treeroot;
+		isDataDirty = true;		
 	}
 
-	public void setCoinbase1(String coinbase1) {
-		this.coinbase1 = coinbase1;
+	public void setmerkeleroot(String merkeleroot) {
+		this.merkeleroot = merkeleroot;
 	}
 
-	public void setCoinbase2(String coinbase2) {
-		this.coinbase2 = coinbase2;
+	public void setwitnessroot(String witnessroot) {
+		this.witnessroot = witnessroot;
 	}
 
 	public void setExtranonce1(String extranonce1) {
@@ -214,7 +215,7 @@ public class GetworkJobTemplate {
 
 			try {
 				// Build the template block header
-				byteStream.write(version);
+				byteStream.write(reserveroot);
 				byteStream.write(hashPrevBlock);
 				byteStream.write(FAKE_MERKLE_ROOT);
 				byteStream.write(time.get().toByteArray());
@@ -226,7 +227,7 @@ public class GetworkJobTemplate {
 			} catch (IOException e) {
 				LOGGER.error(
 						"Failed to update GetworkJobTemplate. version: {}, hashPrevBlock: {}, merkleRoot: {}, time: {}, bits: {}, nonce: {}, padding: {}.",
-						version, hashPrevBlock, FAKE_MERKLE_ROOT, time, bits, nonce, BLOCK_HEADER_PADDING, e);
+						reserveroot, hashPrevBlock, FAKE_MERKLE_ROOT, time, bits, nonce, BLOCK_HEADER_PADDING, e);
 			}
 		}
 
