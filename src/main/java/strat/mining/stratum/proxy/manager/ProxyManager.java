@@ -401,13 +401,14 @@ public class ProxyManager {
         }
 
         MiningNotifyNotification notification = new MiningNotifyNotification();
-        notification.setBitcoinVersion(notify.getBitcoinVersion());
+        notification.setreserveroot(notify.getreserveroot());
         notification.setCleanJobs(notify.getCleanJobs());
-        notification.setCoinbase1(notify.getCoinbase1());
-        notification.setCoinbase2(notify.getCoinbase2());
+        notification.setmerkeleroot(notify.getmerkeleroot());
+        notification.setwitnessroot(notify.getwitnessroot());
         notification.setCurrentNTime(notify.getCurrentNTime());
         notification.setJobId(notify.getJobId());
-        notification.setMerkleBranches(notify.getMerkleBranches());
+        notification.settreeroot(notify.gettreeroot());
+        notification.setblockversion(notify.getblockversion());
         notification.setNetworkDifficultyBits(notify.getNetworkDifficultyBits());
         notification.setPreviousHash(notify.getPreviousHash());
 
