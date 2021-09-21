@@ -73,7 +73,7 @@ public class GetworkJobTemplate {
 
 	private volatile String jobId;
 
-	private volatile byte[] version;
+	private volatile byte[] reserveroot;
 	private volatile byte[] hashPrevBlock;
 	private AtomicBigInteger time;
 	private volatile byte[] bits;
@@ -85,7 +85,8 @@ public class GetworkJobTemplate {
 	private volatile String merkeleroot;
 	private volatile String witnessroot;
 	private volatile String extranonce1;
-
+	private volatile String blockversion;
+	
 	private volatile byte[] templateData;
 
 	// Flag to true when templateData has to be updated.
@@ -181,6 +182,10 @@ public class GetworkJobTemplate {
 		this.merkeleroot = merkeleroot;
 	}
 
+	public void setblockversion(String blockversion) {
+		this.blockversion = blockversion;
+	}	
+		
 	public void setwitnessroot(String witnessroot) {
 		this.witnessroot = witnessroot;
 	}
