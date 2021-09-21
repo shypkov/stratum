@@ -15,6 +15,7 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with multipool-stats-backend. If not, see <http://www.gnu.org/licenses/>.
+ * https://github-wiki-see.page/m/nicehash/sgminer/wiki/Sia-stratum-protocol
  */
 package strat.mining.stratum.proxy.json;
 
@@ -34,19 +35,19 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 	@JsonIgnore
 	private String previousHash;
 	@JsonIgnore
-	private String coinbase1;
+	private String merkeleroot;
 	@JsonIgnore
-	private String coinbase2;
+	private String witnessroot;
 	@JsonIgnore
-	private List<String> merkleBranches;
+	private String treeroot;
 	@JsonIgnore
-	private String bitcoinVersion;
+	private String reserveroot;
+	@JsonIgnore
+	private String blockversion;
 	@JsonIgnore
 	private String networkDifficultyBits;
 	@JsonIgnore
 	private String currentNTime;
-	@JsonIgnore
-	private Boolean cleanJobs;
 
 	public MiningNotifyNotification() {
 		super(METHOD_NAME);
@@ -72,38 +73,47 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 		this.previousHash = previousHash;
 	}
 
-	public String getCoinbase1() {
-		return coinbase1;
+	public String getmerkeleroot() {
+		return merkeleroot;
 	}
 
-	public void setCoinbase1(String coinbase1) {
-		this.coinbase1 = coinbase1;
+	public void setmerkeleroot(String merkeleroot) {
+		this.merkeleroot = merkeleroot;
 	}
 
-	public String getCoinbase2() {
-		return coinbase2;
+	public String getwitnessroot() {
+		return witnessroot;
 	}
 
-	public void setCoinbase2(String coinbase2) {
-		this.coinbase2 = coinbase2;
+	public void setwitnessroot(String witnessroot) {
+		this.witnessroot = witnessroot;
 	}
 
-	public List<String> getMerkleBranches() {
-		return merkleBranches;
+	public String gettreeroot() {
+		return treeroot;
 	}
 
-	public void setMerkleBranches(List<String> merkleBranches) {
-		this.merkleBranches = merkleBranches;
+	public void settreeroot(String treeroot) {
+		this.treeroot = treeroot;
 	}
 
-	public String getBitcoinVersion() {
-		return bitcoinVersion;
+	public String getreserveroot() {
+		return reserveroot;
 	}
 
-	public void setBitcoinVersion(String bitcoinVersion) {
-		this.bitcoinVersion = bitcoinVersion;
+	public void setreserveroot(String reserveroot) {
+		this.reserveroot = reserveroot;
 	}
 
+	
+	public String getblockversion() {
+		return blockversion;
+	}
+
+	public void setblockversion(String blockversion) {
+		this.blockversion = blockversion;
+	}
+	
 	public String getNetworkDifficultyBits() {
 		return networkDifficultyBits;
 	}
@@ -120,13 +130,6 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 		this.currentNTime = currentNTime;
 	}
 
-	public Boolean getCleanJobs() {
-		return cleanJobs;
-	}
-
-	public void setCleanJobs(Boolean cleanJobs) {
-		this.cleanJobs = cleanJobs;
-	}
 
 	@Override
 	public List<Object> getParams() {
@@ -135,14 +138,14 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 			super.setParams(params);
 			params.add(jobId);
 			params.add(previousHash);
-			params.add(coinbase1);
-			params.add(coinbase2);
-			params.add(merkleBranches);
-			params.add(bitcoinVersion);
+			params.add(merkeleroot);
+			params.add(witnessroot);
+			params.add(treeroot);
+			params.add(reserveroot);
+			params.add(blockversion);
 			params.add(networkDifficultyBits);
 			params.add(currentNTime);
-			params.add(cleanJobs);
-		}
+	}
 		return super.getParams();
 	}
 
@@ -152,13 +155,13 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 		if (params != null) {
 			jobId = getParamsObjectAtIndex(0);
 			previousHash = getParamsObjectAtIndex(1);
-			coinbase1 = getParamsObjectAtIndex(2);
-			coinbase2 = getParamsObjectAtIndex(3);
-			merkleBranches = getParamsObjectAtIndex(4);
-			bitcoinVersion = getParamsObjectAtIndex(5);
-			networkDifficultyBits = getParamsObjectAtIndex(6);
-			currentNTime = getParamsObjectAtIndex(7);
-			cleanJobs = getParamsObjectAtIndex(8);
-		}
+			merkeleroot = getParamsObjectAtIndex(2);
+			witnessroot = getParamsObjectAtIndex(3);
+			treeroot = getParamsObjectAtIndex(4);
+			reserveroot = getParamsObjectAtIndex(5);
+			blockversion = getParamsObjectAtIndex(6);
+			networkDifficultyBits = getParamsObjectAtIndex(7);
+			currentNTime = getParamsObjectAtIndex(8);
+	}
 	}
 }
