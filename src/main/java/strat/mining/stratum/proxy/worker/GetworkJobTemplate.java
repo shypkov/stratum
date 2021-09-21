@@ -131,7 +131,7 @@ public class GetworkJobTemplate {
 
 		this.hashPrevBlock = toClone.hashPrevBlock;
 		this.reserveroot = toClone.reserveroot;
-		this.blockversion = blockversion;
+		this.blockversion = toClone.blockversion;
 		// Create the time BigInteger from the LittleEndian hex data.
 		this.time = new AtomicBigInteger(toClone.time);
 		this.bits = toClone.bits;
@@ -175,7 +175,6 @@ public class GetworkJobTemplate {
 
 	public void settreeroot(String treeroot) {
 		this.treeroot = treeroot;
-		isDataDirty = true;		
 	}
 
 	public void setmerkeleroot(String merkeleroot) {
