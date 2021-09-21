@@ -547,7 +547,7 @@ public class StratumWorkerConnection extends StratumConnection implements Worker
         if (pool != null) {
             currentHeader = new GetworkJobTemplate(notification.getJobId(), notification.getreserveroot(), notification.getPreviousHash(),
                     notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.gettreeroot(),
-                    notification.getmerkeleroot(), notification.getwitnessroot(), getPool().getExtranonce1() + extranonce1Tail);
+                    notification.getmerkeleroot(), notification.getwitnessroot(), notification.getblockversion(), getPool().getExtranonce1() + extranonce1Tail);
             currentHeader.setDifficulty(pool.getDifficulty(), ConfigurationManager.getInstance().isScrypt());
         }
     }

@@ -294,7 +294,7 @@ public class GetworkWorkerConnection implements WorkerConnection {
             extranonce2MaxValue = (int) Math.pow(2, 8 * pool.getWorkerExtranonce2Size()) - 1;
             currentJob = new GetworkJobTemplate(notification.getJobId(), notification.getreserveroot(), notification.getPreviousHash(),
                     notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.gettreeroot(),
-                    notification.getmerkeleroot(), notification.getwitnessroot(), getPool().getExtranonce1() + extranonce1Tail);
+                    notification.getmerkeleroot(), notification.getwitnessroot(), notification.getblockversion(), getPool().getExtranonce1() + extranonce1Tail);
             currentJob.setDifficulty(pool.getDifficulty(), ConfigurationManager.getInstance().isScrypt());
 
             // Reset all extranonce2 stuff
@@ -309,6 +309,7 @@ public class GetworkWorkerConnection implements WorkerConnection {
             currentJob.setBits(notification.getNetworkDifficultyBits());
             currentJob.setTime(notification.getCurrentNTime());
             currentJob.settreeroot(notification.gettreeroot());
+            currentJob.setblockversion(notification.getblockversion());
         }
 
         callLongPollingCallbacks();
