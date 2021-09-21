@@ -73,7 +73,7 @@ public class GetworkJobTemplate {
 
 	private volatile String jobId;
 
-	private volatile String reserveroot;
+	private volatile byte[] reserveroot;
 	private volatile byte[] hashPrevBlock;
 	private AtomicBigInteger time;
 	private volatile byte[] bits;
@@ -107,7 +107,7 @@ public class GetworkJobTemplate {
 		this.extranonce1 = extranonce1;
 
 		this.hashPrevBlock = HexUtils.convert(hashPrevBlock);
-		this.reserveroot = reserveroot;
+		this.reserveroot = HexUtils.convert(reserveroot);
 		this.blockversion = blockversion;
 		// Create the time BigInteger from the LittleEndian hex data.
 		this.time = new AtomicBigInteger(HexUtils.convert(time));
@@ -154,7 +154,7 @@ public class GetworkJobTemplate {
 	}
 
 	public void setreserveroot(String reserveroot) {
-		this.reserveroot = reserveroot;
+		this.reserveroot = HexUtils.convert(reserveroot);
 		isDataDirty = true;
 	}
 
@@ -248,10 +248,10 @@ public class GetworkJobTemplate {
 		computeTemplateData();
 
 		// Build the merkleRoot with the given extranonce2
-		byte[] bigEndianMerkleRootHash = buildMerkleRootHash(extranonce2);
+//		byte[] bigEndianMerkleRootHash = buildMerkleRootHash(extranonce2);
 
 		// Byte swap the merkleRoot of 4-bytes words.
-		byte[] littleEndianMerkleRootHash = strat.mining.stratum.proxy.utils.ArrayUtils.swapBytes(bigEndianMerkleRootHash, 4);
+//		byte[] littleEndianMerkleRootHash = strat.mining.stratum.proxy.utils.ArrayUtils.swapBytes(bigEndianMerkleRootHash, 4);
 
 		// And reverse the order of the 4-bytes words.
 		// littleEndianMerkleRootHash =
@@ -259,17 +259,17 @@ public class GetworkJobTemplate {
 		// 4);
 
 		// Then build the data
-		byte[] data = buildData(littleEndianMerkleRootHash);
+//		byte[] data = buildData(littleEndianMerkleRootHash);
 
 		// Compute midstate only if enabled.
 		String midstate = null;
-		if (!ConfigurationManager.getInstance().isNoMidsate()) {
-			midstate = HexUtils.convert(buildMidstate(data));
-		}
+//		if (!ConfigurationManager.getInstance().isNoMidsate()) {
+//			midstate = HexUtils.convert(buildMidstate(data));
+//		}
 
 		GetworkRequestResult result = new GetworkRequestResult();
-		result.setMerkleRoot(HexUtils.convert(littleEndianMerkleRootHash));
-		result.setData(HexUtils.convert(data));
+//		result.setMerkleRoot(HexUtils.convert(littleEndianMerkleRootHash));
+//		result.setData(HexUtils.convert(data));
 		result.setHash1(getHash1());
 		result.setTarget(getTarget());
 		result.setMidstate(midstate);
@@ -312,15 +312,16 @@ public class GetworkJobTemplate {
 	 * @param extranonce2
 	 * @return
 	 */
-	private byte[] buildMerkleRootHash(String extranonce2) {
-		byte[] merkleRoot = buildCoinbaseHash(extranonce2);
+//	private byte[] buildMerkleRootHash(String extranonce2)
+//	{
+//		byte[] merkleRoot = buildCoinbaseHash(extranonce2);
 
-		for (String merkleBranch : merkleBranches) {
-			merkleRoot = SHA256HashingUtils.doubleSha256Hash(ArrayUtils.addAll(merkleRoot, HexUtils.convert(merkleBranch)));
-		}
+//		for (String merkleBranch : merkleBranches) {
+//			merkleRoot = SHA256HashingUtils.doubleSha256Hash(ArrayUtils.addAll(merkleRoot, HexUtils.convert(merkleBranch)));
+//  }
 
-		return merkleRoot;
-	}
+//		return merkleRoot;
+//	}
 
 	/**
 	 * 
@@ -328,7 +329,7 @@ public class GetworkJobTemplate {
 	 * @return
 	 */
 	private byte[] buildCoinbaseHash(String extranonce2) {
-		String coinbaseString = coinbase1 + extranonce1 + extranonce2 + coinbase2;
+		String coinbaseString = extranonce1 + extranonce2;
 		byte[] rawCoinbase = HexUtils.convert(coinbaseString);
 		return SHA256HashingUtils.doubleSha256Hash(rawCoinbase);
 	}
