@@ -48,7 +48,9 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 	private String networkDifficultyBits;
 	@JsonIgnore
 	private String currentNTime;
-
+	@JsonIgnore
+	private Boolean cleanJobs;
+		
 	public MiningNotifyNotification() {
 		super(METHOD_NAME);
 	}
@@ -130,6 +132,13 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 		this.currentNTime = currentNTime;
 	}
 
+	public Boolean getCleanJobs() {
+		return cleanJobs;
+	}
+
+	public void setCleanJobs(Boolean cleanJobs) {
+		this.cleanJobs = cleanJobs;
+	}
 
 	@Override
 	public List<Object> getParams() {
@@ -145,6 +154,7 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 			params.add(blockversion);
 			params.add(networkDifficultyBits);
 			params.add(currentNTime);
+			params.add(cleanJobs);
 	}
 		return super.getParams();
 	}
@@ -162,6 +172,7 @@ public class MiningNotifyNotification extends JsonRpcNotification {
 			blockversion = getParamsObjectAtIndex(6);
 			networkDifficultyBits = getParamsObjectAtIndex(7);
 			currentNTime = getParamsObjectAtIndex(8);
-	}
+			cleanJobs = getParamsObjectAtIndex(9);
+			}
 	}
 }
