@@ -292,9 +292,9 @@ public class GetworkWorkerConnection implements WorkerConnection {
         if (pool != null && notification.getCleanJobs()) {
             extranonce2Counter.set(0);
             extranonce2MaxValue = (int) Math.pow(2, 8 * pool.getWorkerExtranonce2Size()) - 1;
-            currentJob = new GetworkJobTemplate(notification.getJobId(), notification.getBitcoinVersion(), notification.getPreviousHash(),
-                    notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.getMerkleBranches(),
-                    notification.getCoinbase1(), notification.getCoinbase2(), getPool().getExtranonce1() + extranonce1Tail);
+            currentJob = new GetworkJobTemplate(notification.getJobId(), notification.getreserveroot(), notification.getPreviousHash(),
+                    notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.gettreeroot(),
+                    notification.getmerkeleroot(), notification.getwitnessroot(), getPool().getExtranonce1() + extranonce1Tail);
             currentJob.setDifficulty(pool.getDifficulty(), ConfigurationManager.getInstance().isScrypt());
 
             // Reset all extranonce2 stuff
@@ -302,13 +302,13 @@ public class GetworkWorkerConnection implements WorkerConnection {
             extranonce2AndJobIdByMerkleRoot.clear();
         } else {
             currentJob.setJobId(notification.getJobId());
-            currentJob.setCoinbase1(notification.getCoinbase1());
-            currentJob.setCoinbase2(notification.getCoinbase2());
+            currentJob.setmerkeleroot(notification.getmerkeleroot());
+            currentJob.setwitnessroot(notification.getwitnessroot());
             currentJob.setHashPrevBlock(notification.getPreviousHash());
-            currentJob.setVersion(notification.getBitcoinVersion());
+            currentJob.setreserveroot(notification.getreserveroot());
             currentJob.setBits(notification.getNetworkDifficultyBits());
             currentJob.setTime(notification.getCurrentNTime());
-            currentJob.setMerkleBranches(notification.getMerkleBranches());
+            currentJob.settreeroot(notification.gettreeroot());
         }
 
         callLongPollingCallbacks();
