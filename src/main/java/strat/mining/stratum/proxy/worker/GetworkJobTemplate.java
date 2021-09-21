@@ -73,7 +73,7 @@ public class GetworkJobTemplate {
 
 	private volatile String jobId;
 
-	private volatile byte[] reserveroot;
+	private volatile String reserveroot;
 	private volatile byte[] hashPrevBlock;
 	private AtomicBigInteger time;
 	private volatile byte[] bits;
