@@ -545,9 +545,9 @@ public class StratumWorkerConnection extends StratumConnection implements Worker
         // Update the job only if a clean job is requested and if the connection
         // is bound to a pool.
         if (pool != null) {
-            currentHeader = new GetworkJobTemplate(notification.getJobId(), notification.getBitcoinVersion(), notification.getPreviousHash(),
-                    notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.getMerkleBranches(),
-                    notification.getCoinbase1(), notification.getCoinbase2(), getPool().getExtranonce1() + extranonce1Tail);
+            currentHeader = new GetworkJobTemplate(notification.getJobId(), notification.getreserveroot(), notification.getPreviousHash(),
+                    notification.getCurrentNTime(), notification.getNetworkDifficultyBits(), notification.gettreeroot(),
+                    notification.getmerkeleroot(), notification.getwitnessroot(), getPool().getExtranonce1() + extranonce1Tail);
             currentHeader.setDifficulty(pool.getDifficulty(), ConfigurationManager.getInstance().isScrypt());
         }
     }
