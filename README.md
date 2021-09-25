@@ -1,6 +1,6 @@
-#Packaging (Not mandatory)
+Original release (slightly changed) that supports stratum pools for BTC only
 
-You can directly use a release (https://github.com/shypkov/stratum/raw/0.8.1/stratum-proxy-0.8.1.zip) and go to the Installation and Usage section.
+You can directly use a release (https://github.com/shypkov/stratum/releases/download/btcproxy/btcproxy.zip) and go to the Installation and Usage section.
 
 The packaging of the application is done through Maven and will generate a ZIP which contains the program and all its dependencies.
 
