@@ -396,13 +396,10 @@ public class ProxyManager {
      * @param setDifficulty
      */
     public void onPoolNotify(Pool pool, MiningNotifyNotification notify) {
-        if (notify.getCleanJobs()) {
-            LOGGER.info("New block detected on pool {}.", pool.getName());
-        }
 
+        LOGGER.info("New notify detected without cleanjob on pool {}.", pool.getName());
         MiningNotifyNotification notification = new MiningNotifyNotification();
         notification.setreserveroot(notify.getreserveroot());
-        notification.setCleanJobs(notify.getCleanJobs());
         notification.setmerkeleroot(notify.getmerkeleroot());
         notification.setwitnessroot(notify.getwitnessroot());
         notification.setCurrentNTime(notify.getCurrentNTime());
